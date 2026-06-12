@@ -30,36 +30,81 @@
 
 /* ---- Responsive: code blocks & tables ---- */
 
-/* Code blocks: allow horizontal scroll instead of overflow */
-.vp-doc div[class*="language-"] {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
+/* Prevent any element inside doc content from breaking the layout */
+.vp-doc {
+  overflow-wrap: break-word;
 }
 
-.vp-doc div[class*="language-"] pre {
-  white-space: pre;
-  word-break: normal;
+.vp-doc img,
+.vp-doc video,
+.vp-doc iframe,
+.vp-doc svg {
+  max-width: 100%;
+  height: auto;
 }
 
-/* Inline code: allow wrapping */
+/* Inline code: allow wrapping for long inline code */
 .vp-doc :not(pre) > code {
   white-space: normal;
   word-break: break-word;
+  overflow-wrap: break-word;
 }
 
-/* Tables: responsive wrapper */
-.vp-doc table {
-  display: block;
-  overflow-x: auto;
+/* Code blocks: force scroll when line is wider than the screen */
+.vp-doc div[class*="language-"] {
+  position: relative;
+  overflow-x: auto !important;
   -webkit-overflow-scrolling: touch;
-  white-space: nowrap;
   max-width: 100%;
 }
 
-/* Shrink padding on small screens so content fits */
+.vp-doc div[class*="language-"] pre {
+  white-space: pre !important;
+  word-wrap: normal !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  min-width: max-content;
+}
+
+.vp-doc div[class*="language-"] code {
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+/* Tables: wrap in scrollable area so they don't blow out the page */
+.vp-doc .vp-table,
+.vp-doc table {
+  display: block !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+.vp-doc table {
+  width: max-content;
+  min-width: 100%;
+}
+
+/* Long unbreakable text (URLs, paths) */
+.vp-doc p,
+.vp-doc li,
+.vp-doc td,
+.vp-doc th {
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ---- Mobile adjustments ---- */
+
 @media (max-width: 768px) {
   .vp-doc div[class*="language-"] pre {
-    padding: 16px;
+    padding: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .vp-doc div[class*="language-"] code {
     font-size: 13px;
   }
 
@@ -70,12 +115,27 @@
   .vp-doc th,
   .vp-doc td {
     padding: 8px 10px;
+    white-space: nowrap;
   }
 }
 
 @media (max-width: 480px) {
   .vp-doc div[class*="language-"] pre {
-    padding: 12px;
+    padding: 10px;
     font-size: 12px;
+    line-height: 1.45;
+  }
+
+  .vp-doc div[class*="language-"] code {
+    font-size: 12px;
+  }
+
+  .vp-doc table {
+    font-size: 12px;
+  }
+
+  .vp-doc th,
+  .vp-doc td {
+    padding: 6px 8px;
   }
 }
