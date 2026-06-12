@@ -1,0 +1,35 @@
+{
+  "name": "@xyzintel/authlite-sqlite",
+  "version": "0.1.1",
+  "description": "SQLite adapter for AuthLite using better-sqlite3.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts",
+    "dev": "tsup src/index.ts --format cjs,esm --watch --dts"
+  },
+  "keywords": [
+    "auth",
+    "sqlite",
+    "better-sqlite3",
+    "authlite",
+    "adapter"
+  ],
+  "author": "xyzintel",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@xyzintel/authlite-core": "workspace:*",
+    "better-sqlite3": "^11.0.0",
+    "nanoid": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12"
+  }
+}
