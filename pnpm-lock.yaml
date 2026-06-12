@@ -26,12 +26,6 @@ importers:
       '@node-rs/argon2':
         specifier: ^2.0.2
         version: 2.0.2
-      cookie:
-        specifier: ^1.1.0
-        version: 1.1.1
-      nanoid:
-        specifier: ^5.1.0
-        version: 5.1.11
     devDependencies:
       '@types/node':
         specifier: ^22.0.0
@@ -51,9 +45,6 @@ importers:
       '@xyzintel/authlite-core':
         specifier: workspace:*
         version: link:../core
-      cookie:
-        specifier: ^1.1.0
-        version: 1.1.1
       next:
         specifier: '>=13.0.0'
         version: 16.2.9(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
@@ -1354,10 +1345,6 @@ packages:
 
   convert-source-map@2.0.0:
     resolution: {integrity: sha512-Kvp459HrV2FEJ1CAsi1Ku+MY3kasH19TFykTz2xWmMeq6bk2NU3XXvfJ+Q61m0xktWwt+1HSYf3JZsTms3aRJg==}
-
-  cookie@1.1.1:
-    resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
-    engines: {node: '>=18'}
 
   copy-anything@4.0.5:
     resolution: {integrity: sha512-7Vv6asjS4gMOuILabD3l739tsaxFQmC+a7pLZm02zyvs8p977bL3zEgq3yDk5rn9B0PbYgIv++jmHcuUab4RhA==}
@@ -3103,8 +3090,6 @@ snapshots:
   consola@3.4.2: {}
 
   convert-source-map@2.0.0: {}
-
-  cookie@1.1.1: {}
 
   copy-anything@4.0.5:
     dependencies:
