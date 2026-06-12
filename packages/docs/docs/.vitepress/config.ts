@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "AuthLite",
   description: "Secure, lightweight, and framework-agnostic authentication for Node.js.",
+  base: '/authlite/',
   markdown: {
     lineNumbers: true
   },
