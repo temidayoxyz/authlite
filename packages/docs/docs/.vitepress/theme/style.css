@@ -22,4 +22,60 @@
   color: var(--vp-c-brand);
 }
 
-/* Copy page button uses brand on hover already via CSS variable */
+/* Logo size */
+.VPNavBarTitle .logo {
+  height: 28px;
+  width: auto;
+}
+
+/* ---- Responsive: code blocks & tables ---- */
+
+/* Code blocks: allow horizontal scroll instead of overflow */
+.vp-doc div[class*="language-"] {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.vp-doc div[class*="language-"] pre {
+  white-space: pre;
+  word-break: normal;
+}
+
+/* Inline code: allow wrapping */
+.vp-doc :not(pre) > code {
+  white-space: normal;
+  word-break: break-word;
+}
+
+/* Tables: responsive wrapper */
+.vp-doc table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+/* Shrink padding on small screens so content fits */
+@media (max-width: 768px) {
+  .vp-doc div[class*="language-"] pre {
+    padding: 16px;
+    font-size: 13px;
+  }
+
+  .vp-doc table {
+    font-size: 13px;
+  }
+
+  .vp-doc th,
+  .vp-doc td {
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vp-doc div[class*="language-"] pre {
+    padding: 12px;
+    font-size: 12px;
+  }
+}
