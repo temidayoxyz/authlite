@@ -1,26 +1,40 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 const copied = ref(false);
 
+onMounted(() => {
+  // Move button next to the page title (h1) instead of above it
+  const h1 = document.querySelector(".vp-doc h1");
+  const btn = document.querySelector(".copy-page-btn-wrapper");
+  if (h1 && btn && h1.parentNode) {
+    const wrapper = document.createElement("div");
+    wrapper.style.display = "flex";
+    wrapper.style.alignItems = "baseline";
+    wrapper.style.justifyContent = "space-between";
+    wrapper.style.gap = "16px";
+    wrapper.style.marginBottom = "16px";
+    h1.parentNode.insertBefore(wrapper, h1);
+    wrapper.appendChild(h1);
+    wrapper.appendChild(btn);
+  }
+});
+
 function copyPage() {
-  // Get the main content area
   const content = document.querySelector(".vp-doc");
   if (!content) return;
 
-  // Clone the content to avoid modifying the DOM
   const clone = content.cloneNode(true) as HTMLElement;
 
-  // Remove copy button itself from the clone
+  // Remove copy button and injected wrapper from the clone
   clone.querySelectorAll(".copy-page-btn-wrapper").forEach((el) => el.remove());
+  clone.querySelectorAll(".copy-page-title-row").forEach((el) => el.remove());
 
   // Remove line numbers from code blocks
   clone.querySelectorAll(".line-numbers-wrapper").forEach((el) => el.remove());
 
-  // Extract text content with structure preserved
   let markdown = "";
 
-  // Walk through top-level elements
   const walk = (el: Element) => {
     for (const child of el.children) {
       const tag = child.tagName.toLowerCase();
@@ -52,7 +66,6 @@ function copyPage() {
         }
         markdown += "\n";
       } else if (tag === "table") {
-        // Copy table content in markdown-ish format
         const rows = child.querySelectorAll("tr");
         for (const row of rows) {
           const cells = row.querySelectorAll("th, td");
@@ -72,7 +85,6 @@ function copyPage() {
 
   walk(clone);
 
-  // Fallback: if markdown is empty, just copy text
   const finalText = markdown.trim() || content.textContent?.trim() || "";
 
   navigator.clipboard.writeText(finalText).then(() => {
@@ -101,8 +113,7 @@ function copyPage() {
 
 <style scoped>
 .copy-page-btn-wrapper {
-  display: inline-flex;
-  align-items: center;
+  flex-shrink: 0;
 }
 
 .copy-page-btn {
@@ -117,6 +128,7 @@ function copyPage() {
   font-size: 13px;
   cursor: pointer;
   transition: all 0.2s;
+  white-space: nowrap;
 }
 
 .copy-page-btn:hover {

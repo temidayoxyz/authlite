@@ -19,7 +19,7 @@ export default defineConfig({
     nav: [
       { text: 'Guide', link: '/guide/getting-started' },
       { text: 'Reference', link: '/reference/core' },
-      { text: 'GitHub', link: 'https://github.com/temidayoxyz/authlite' }
+      { text: 'Changelog', link: '/changelog' }
     ],
     sidebar: [
       {
@@ -42,7 +42,7 @@ export default defineConfig({
     ],
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2026-present Temidayo'
+      copyright: `© ${new Date().getFullYear()} <a href="https://github.com/temidayoxyz" target="_blank">Temidayo</a>`
     }
   }
 })
