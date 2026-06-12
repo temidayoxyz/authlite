@@ -19,6 +19,10 @@ AuthLite is a monorepo managed with `pnpm`. It is split into three main packages
     -   `NextAuthLite` class: Wraps the core engine with Next.js specific cookie handling (`next/headers`).
     -   Provides `getSession`, `signIn`, and `signOut` for App Router.
 
+4.  **`@xyzintel/authlite-docs`**: The documentation website.
+    -   Built with VitePress.
+    -   Located in `packages/docs`.
+
 ## Tech Stack ($0)
 
 -   **Language:** TypeScript
@@ -27,6 +31,7 @@ AuthLite is a monorepo managed with `pnpm`. It is split into three main packages
 -   **Testing:** `vitest`
 -   **Database:** SQLite (`better-sqlite3`)
 -   **Security:** Argon2id, SHA-256 token hashing, Secure Cookies.
+-   **Documentation:** VitePress
 
 ## Future Roadmap
 
