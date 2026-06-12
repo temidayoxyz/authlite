@@ -7,14 +7,14 @@ export default defineConfig({
   head: [
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'AuthLite — Lightweight Auth for Node.js' }],
-    ['meta', { property: 'og:description', content: 'Secure, self-hosted authentication library for SQLite. Argon2id hashing, session management, and first-class Next.js support. Zero vendor lock-in, zero cost.' }],
+    ['meta', { property: 'og:description', content: 'Secure, lightweight authentication library for SQLite.' }],
     ['meta', { property: 'og:image', content: '/authlite/logo.png' }],
     ['meta', { property: 'og:image:width', content: '500' }],
     ['meta', { property: 'og:image:height', content: '500' }],
     ['meta', { property: 'og:site_name', content: 'AuthLite' }],
     ['meta', { name: 'twitter:card', content: 'summary' }],
     ['meta', { name: 'twitter:title', content: 'AuthLite — Lightweight Auth for Node.js' }],
-    ['meta', { name: 'twitter:description', content: 'Secure, self-hosted authentication library for SQLite. Zero vendor lock-in, zero cost.' }],
+    ['meta', { name: 'twitter:description', content: 'Secure, lightweight authentication library for SQLite.' }],
     ['meta', { name: 'twitter:image', content: '/authlite/logo.png' }],
   ],
   markdown: {
