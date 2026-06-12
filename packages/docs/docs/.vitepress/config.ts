@@ -12,10 +12,6 @@ export default defineConfig({
     search: {
       provider: 'local'
     },
-    editLink: {
-      pattern: 'https://github.com/temidayoxyz/authlite/edit/main/packages/docs/docs/:path',
-      text: 'Edit this page on GitHub'
-    },
     nav: [
       { text: 'Guide', link: '/guide/getting-started' },
       { text: 'Reference', link: '/reference/core' },

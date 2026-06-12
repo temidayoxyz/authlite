@@ -1,0 +1,25 @@
+:root {
+  --vp-c-brand: #4F46E5;
+  --vp-c-brand-light: #6366F1;
+  --vp-c-brand-lighter: #818CF8;
+  --vp-c-brand-dark: #4338CA;
+  --vp-c-brand-darker: #3730A3;
+}
+
+/* Home page hero */
+.VPHero .name {
+  color: var(--vp-c-brand);
+}
+
+/* Nav links */
+.VPNavBarMenuLink:hover,
+.VPNavBarMenuLink.active {
+  color: var(--vp-c-brand);
+}
+
+/* Footer link */
+.VPFooter a {
+  color: var(--vp-c-brand);
+}
+
+/* Copy page button uses brand on hover already via CSS variable */
