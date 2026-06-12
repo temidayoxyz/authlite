@@ -1,3 +1,7 @@
+---
+sidebar: false
+---
+
 # Changelog
 
 All notable changes to AuthLite.

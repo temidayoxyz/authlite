@@ -1,9 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 
+const visible = ref(true);
 const copied = ref(false);
 
 onMounted(() => {
+  // Hide on pages that shouldn't have the button
+  const path = window.location.pathname;
+  if (path.includes("/changelog")) {
+    visible.value = false;
+    return;
+  }
+
   // Move button next to the page title (h1) instead of above it
   const h1 = document.querySelector(".vp-doc h1");
   const btn = document.querySelector(".copy-page-btn-wrapper");
@@ -97,7 +105,7 @@ function copyPage() {
 </script>
 
 <template>
-  <span class="copy-page-btn-wrapper">
+  <span v-if="visible" class="copy-page-btn-wrapper">
     <button class="copy-page-btn" @click="copyPage" :title="copied ? 'Copied!' : 'Copy page content'">
       <svg v-if="!copied" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
