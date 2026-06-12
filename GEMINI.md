@@ -4,18 +4,18 @@
 
 AuthLite is a monorepo managed with `pnpm`. It is split into three main packages to maintain separation of concerns:
 
-1.  **`@authlite/core`**: Contains the protocol-agnostic logic.
+1.  **`@xyzintel/authlite-core`**: Contains the protocol-agnostic logic.
     -   `AuthLite` class: The main engine.
     -   `AuthAdapter` interface: Defines how the engine communicates with the database.
     -   Password hashing via `@node-rs/argon2`.
     -   Session management (token generation/hashing).
 
-2.  **`@authlite/sqlite`**: The primary database adapter.
+2.  **`@xyzintel/authlite-sqlite`**: The primary database adapter.
     -   Uses `better-sqlite3`.
     -   Handles automatic schema creation.
     -   Implements `AuthAdapter`.
 
-3.  **`@authlite/nextjs`**: Framework-specific helpers.
+3.  **`@xyzintel/authlite-nextjs`**: Framework-specific helpers.
     -   `NextAuthLite` class: Wraps the core engine with Next.js specific cookie handling (`next/headers`).
     -   Provides `getSession`, `signIn`, and `signOut` for App Router.
 
@@ -30,7 +30,7 @@ AuthLite is a monorepo managed with `pnpm`. It is split into three main packages
 -   **Bundler:** `tsup` (esbuild based)
 -   **Testing:** `vitest`
 -   **Database:** SQLite (`better-sqlite3`)
--   **Security:** Argon2id, SHA-256 token hashing, Secure Cookies.
+-   **Security:** Argon2id, HMAC-SHA256 token hashing, Secure Cookies.
 -   **Documentation:** VitePress
 
 ## Future Roadmap

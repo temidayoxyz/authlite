@@ -1,20 +1,22 @@
-import { AuthLite, AuthLiteResult, Session, User } from "@xyzintel/authlite-core";
+import { AuthLite, AuthLiteResult, SafeUser, Session } from "@xyzintel/authlite-core";
 import { cookies } from "next/headers";
 
 export class NextAuthLite {
   private auth: AuthLite;
   private cookieName: string;
+  private sessionMaxAge: number;
 
   constructor(auth: AuthLite) {
     this.auth = auth;
-    this.cookieName = "authlite_session"; // Should match AuthLite config
+    this.cookieName = auth.getCookieName();
+    this.sessionMaxAge = auth.getSessionMaxAge();
   }
 
   /**
    * Get the current session and user from cookies.
    * Works in Server Components, Server Actions, and Route Handlers.
    */
-  async getSession(): Promise<{ user: User; session: Session } | null> {
+  async getSession(): Promise<{ user: SafeUser; session: Session } | null> {
     const cookieStore = await cookies();
     const token = cookieStore.get(this.cookieName)?.value;
 
@@ -49,7 +51,7 @@ export class NextAuthLite {
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/",
-      maxAge: 60 * 60 * 24 * 30, // 30 days
+      maxAge: this.sessionMaxAge,
     });
 
     return { success: true };
@@ -63,7 +65,10 @@ export class NextAuthLite {
     const token = cookieStore.get(this.cookieName)?.value;
 
     if (token) {
-      await this.auth.signOut(token);
+      const result = await this.auth.signOut(token);
+      if (!result.success) {
+        return result;
+      }
     }
 
     cookieStore.delete(this.cookieName);

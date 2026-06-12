@@ -1,6 +1,6 @@
 {
   "name": "@xyzintel/authlite-nextjs",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Next.js integration for AuthLite. Supports Server Components and Server Actions.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -26,8 +26,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@xyzintel/authlite-core": "workspace:*",
-    "cookie": "^1.1.0"
+    "@xyzintel/authlite-core": "workspace:*"
   },
   "peerDependencies": {
     "next": ">=13.0.0",

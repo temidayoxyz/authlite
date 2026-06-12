@@ -1,6 +1,6 @@
 {
   "name": "@xyzintel/authlite-core",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Core authentication engine for AuthLite. Secure, lightweight, and database-agnostic.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -27,9 +27,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@node-rs/argon2": "^2.0.2",
-    "nanoid": "^5.1.0",
-    "cookie": "^1.1.0"
+    "@node-rs/argon2": "^2.0.2"
   },
   "devDependencies": {
     "@types/node": "^22.0.0"

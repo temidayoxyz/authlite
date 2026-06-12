@@ -2,12 +2,15 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   title: "AuthLite",
-  description: "Secure, lightweight, and framework-agnostic authentication.",
+  description: "Secure, lightweight, and framework-agnostic authentication for Node.js.",
   markdown: {
     lineNumbers: true
   },
   themeConfig: {
     logo: '/logo.png',
+    search: {
+      provider: 'local'
+    },
     editLink: {
       pattern: 'https://github.com/temidayoxyz/authlite/edit/main/packages/docs/docs/:path',
       text: 'Edit this page on GitHub'

@@ -97,4 +97,19 @@ describe("AuthLite Core", () => {
     const result = await auth.validateSession("invalid-token");
     expect(result.success).toBe(false);
   });
+
+  it("should fail validation for expired session", async () => {
+    await auth.signUp("test@example.com", "password123");
+    const signInResult = await auth.signIn("test@example.com", "password123");
+    const sessionToken = signInResult.data!.sessionToken;
+
+    // Manually expire the session
+    const session = adapter.sessions[0];
+    session.expiresAt = new Date(Date.now() - 1000 * 60); // 1 minute ago
+
+    const result = await auth.validateSession(sessionToken);
+    expect(result.success).toBe(false);
+    expect(result.error).toBe("Session expired");
+    expect(adapter.sessions.length).toBe(0); // Deleted expired session
+  });
 });

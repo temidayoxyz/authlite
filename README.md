@@ -14,16 +14,16 @@ AuthLite is designed for founders, hackers, and builders who want secure, simple
 
 ## Packages
 
-- `@authlite/core`: The core logic engine (hashing, sessions).
-- `@authlite/sqlite`: SQLite adapter using `better-sqlite3`.
-- `@authlite/nextjs`: First-class integration for Next.js App Router.
+- `@xyzintel/authlite-core`: The core logic engine (hashing, sessions).
+- `@xyzintel/authlite-sqlite`: SQLite adapter using `better-sqlite3`.
+- `@xyzintel/authlite-nextjs`: First-class integration for Next.js App Router.
 
 ## Quick Start (Next.js)
 
 ### 1. Install
 
 ```bash
-npm install @authlite/core @authlite/sqlite @authlite/nextjs better-sqlite3
+npm install @xyzintel/authlite-core @xyzintel/authlite-sqlite @xyzintel/authlite-nextjs better-sqlite3
 ```
 
 ### 2. Initialize
@@ -31,9 +31,9 @@ npm install @authlite/core @authlite/sqlite @authlite/nextjs better-sqlite3
 Create a file like `lib/auth.ts`:
 
 ```typescript
-import { AuthLite } from "@authlite/core";
-import { SQLiteAdapter } from "@authlite/sqlite";
-import { NextAuthLite } from "@authlite/nextjs";
+import { AuthLite } from "@xyzintel/authlite-core";
+import { SQLiteAdapter } from "@xyzintel/authlite-sqlite";
+import { NextAuthLite } from "@xyzintel/authlite-nextjs";
 
 const adapter = new SQLiteAdapter("app.db");
 const auth = new AuthLite(adapter, {
@@ -84,6 +84,7 @@ export async function middleware(request: NextRequest) {
 
 AuthLite follows OWASP best practices:
 - **Argon2id** password hashing.
+- **HMAC-SHA256** session token hashing.
 - **Database-backed sessions** (no stateless JWT risks).
 - **HttpOnly, Secure, SameSite** cookies.
 - **Constant-time** password verification.

@@ -1,7 +1,6 @@
 import { hash, verify } from "@node-rs/argon2";
-import { nanoid } from "nanoid";
-import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
-import { AuthAdapter, AuthLiteConfig, AuthLiteResult, Session, User } from "./types";
+import { createHmac, randomBytes } from "node:crypto";
+import { AuthAdapter, AuthLiteConfig, AuthLiteResult, SafeUser, Session, User } from "./types";
 
 export * from "./types";
 
@@ -18,6 +17,18 @@ export class AuthLite {
     };
   }
 
+  getCookieName(): string {
+    return this.config.cookieName;
+  }
+
+  getSessionExpiryDays(): number {
+    return this.config.sessionExpiryDays;
+  }
+
+  getSessionMaxAge(): number {
+    return this.config.sessionExpiryDays * 24 * 60 * 60;
+  }
+
   /**
    * Initialize the database/adapter if needed.
    */
@@ -30,7 +41,7 @@ export class AuthLite {
   /**
    * Create a new user account.
    */
-  async signUp(email: string, password: string): Promise<AuthLiteResult<User>> {
+  async signUp(email: string, password: string): Promise<AuthLiteResult<SafeUser>> {
     try {
       const existing = await this.adapter.getUserByEmail(email);
       if (existing) {
@@ -39,8 +50,8 @@ export class AuthLite {
 
       const passwordHash = await hash(password);
       const user = await this.adapter.createUser(email, passwordHash);
-      
-      return { success: true, data: user };
+
+      return { success: true, data: this.sanitizeUser(user) };
     } catch (e: any) {
       return { success: false, error: e.message };
     }
@@ -49,7 +60,7 @@ export class AuthLite {
   /**
    * Sign in an existing user.
    */
-  async signIn(email: string, password: string): Promise<AuthLiteResult<{ user: User; sessionToken: string }>> {
+  async signIn(email: string, password: string): Promise<AuthLiteResult<{ user: SafeUser; sessionToken: string }>> {
     try {
       const user = await this.adapter.getUserByEmail(email);
       if (!user) {
@@ -69,7 +80,7 @@ export class AuthLite {
 
       await this.adapter.createSession(user.id, tokenHash, expiresAt);
 
-      return { success: true, data: { user, sessionToken } };
+      return { success: true, data: { user: this.sanitizeUser(user), sessionToken } };
     } catch (e: any) {
       return { success: false, error: e.message };
     }
@@ -78,7 +89,7 @@ export class AuthLite {
   /**
    * Validate a session token and return the associated user.
    */
-  async validateSession(sessionToken: string): Promise<AuthLiteResult<{ user: User; session: Session }>> {
+  async validateSession(sessionToken: string): Promise<AuthLiteResult<{ user: SafeUser; session: Session }>> {
     try {
       const tokenHash = this.hashToken(sessionToken);
       const session = await this.adapter.getSessionByTokenHash(tokenHash);
@@ -97,7 +108,7 @@ export class AuthLite {
         return { success: false, error: "User not found" };
       }
 
-      return { success: true, data: { user, session } };
+      return { success: true, data: { user: this.sanitizeUser(user), session } };
     } catch (e: any) {
       return { success: false, error: e.message };
     }
@@ -123,9 +134,14 @@ export class AuthLite {
     return randomBytes(32).toString("hex");
   }
 
+  private sanitizeUser(user: User): Omit<User, "passwordHash"> {
+    const { passwordHash, ...safe } = user;
+    return safe;
+  }
+
   private hashToken(token: string): string {
-    return createHash("sha256")
-      .update(token + this.config.secret)
+    return createHmac("sha256", this.config.secret)
+      .update(token)
       .digest("hex");
   }
 }
