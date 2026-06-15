@@ -2,6 +2,11 @@
 
 AuthLite is a modular authentication library. To get started, you'll need the core package and a database adapter.
 
+## Prerequisites
+
+- **Node.js 18 or later** — AuthLite's native dependencies (`better-sqlite3` and `@node-rs/argon2`) require Node.js 18+. Running an older version will produce a warning from npm.
+- **better-sqlite3** — The SQLite adapter depends on `better-sqlite3` (version 11 or 12). If you are on a recent Node.js release, use `better-sqlite3@^12.0.0` for the best prebuilt binary coverage.
+
 ## Installation
 
 Install the core package and the SQLite adapter (recommended for starting):

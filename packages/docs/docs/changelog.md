@@ -10,6 +10,16 @@ All notable changes to AuthLite.
 
 ---
 
+## [0.1.3] — 2026-06-15
+
+### Fixed
+
+- **Widened `better-sqlite3` version range** to `^11.0.0 || ^12.0.0` so npm can use v12 when available, which ships prebuilt binaries for newer Node.js versions and avoids native compilation failures on systems without C++ build tools.
+- **Added `engines` field** (`node >= 18.0.0`) to all three packages so package managers warn users before attempting an install on unsupported Node.js versions.
+- **Updated documentation** with a Prerequisites section listing Node.js 18+ requirement and better-sqlite3 compatibility notes.
+
+---
+
 ## [0.1.2] — 2026-06-12
 
 ### Fixed

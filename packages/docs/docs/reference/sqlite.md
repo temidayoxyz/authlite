@@ -2,6 +2,8 @@
 
 The SQLite adapter implements the `AuthAdapter` interface using `better-sqlite3` — a synchronous, native SQLite binding for Node.js.
 
+Requires **Node.js 18+** and `better-sqlite3` version 11 or 12 (`^11.0.0 || ^12.0.0`).
+
 ## SQLiteAdapter Class
 
 ### Constructor

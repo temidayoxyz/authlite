@@ -58,7 +58,7 @@ importers:
         specifier: workspace:*
         version: link:../core
       better-sqlite3:
-        specifier: ^11.0.0
+        specifier: ^11.0.0 || ^12.0.0
         version: 11.10.0
       nanoid:
         specifier: ^5.1.0
