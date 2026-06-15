@@ -18,6 +18,10 @@ AuthLite is designed for founders, hackers, and builders who want secure, simple
 - `@xyzintel/authlite-sqlite`: SQLite adapter using `better-sqlite3`.
 - `@xyzintel/authlite-nextjs`: First-class integration for Next.js App Router.
 
+## Requirements
+
+- **Node.js 18 or later** — AuthLite's native dependencies require Node 18+. Package managers will warn on older versions.
+
 ## Quick Start (Next.js)
 
 ### 1. Install
